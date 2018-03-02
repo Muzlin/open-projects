@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #3D3B43;
+    /* url("../img/space-bg.jpg") no-repeat center center;*/
+    background-size: cover;
+    height: 100vh;
+}
+
+.row{
+    text-align: center;
+}
+
+.row>kbd {
+    background-color: #000;
+    display: inline-block;
+    width: 50px;
+    height: 40px;
+    position: relative;
+}
+.row>kbd>span{
+    color: #FFF;
+}
+.row>kbd>button{
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 40px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    display: none;
+}
+.row>kbd:hover>button{
+    display: inline-block;
+}
+.row>kbd>img{
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+}
+.row>kbd:hover>img{
+    display: none;
+}
