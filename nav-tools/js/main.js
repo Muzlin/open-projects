@@ -6,47 +6,7 @@ var keys = dataHash.keys // 所有的key hash
 var mapSite = dataHash.mapSite // 键 域名 映射hash
 
 // 生成键盘
-for (var index = 0; index < keys.length; index++) {
-    // 生成每行的div
-    var div = tag('div')
-    div.className = 'row'
-    keyboard.appendChild(div)    
-    // 生成每行的 kbd
-    var rowKeys = keys[index] // 每行的 key hash
-    for(var item in rowKeys){
-        var kbd = tag('kbd')
-        // 生成 span 包裹文字
-        var span = tag('span')
-        span.textContent = rowKeys[item]
-        // 生成 button
-        var button = tag('button')
-        button.textContent = '编辑'
-        button.id = rowKeys[item]
-        button.onclick = function(e){
-            // 弹出框并获取用户输入的内容
-            var webSite = prompt('修改网址')
-            // 获取当前点击的元素
-            var thisTag = e['target']
-            var id = thisTag['id']
-            // 改变hash的值
-            mapSite[id] = webSite
-            // 存入localstrage
-            localStorage.setItem('webSiteHash',JSON.stringify(mapSite))
-            // 改变img
-            var thisImg = thisTag.previousSibling
-            thisImg.src = 'http://' + webSite + '/favicon.ico'
-        }
-        // 生成 img
-        var img = tag('img')
-        img.src = 'http://' + mapSite[rowKeys[item]] + '/favicon.ico'
-        // 添加至 kbd
-        kbd.appendChild(img)
-        kbd.appendChild(button)     
-        kbd.appendChild(span)
-        // 将 kdb 添加至每行的 div
-        div.appendChild(kbd)
-    }
-}
+generateKeyboard(keys,mapSite)
 
 // 键盘监听
 document.onkeypress = function(e){
@@ -57,8 +17,57 @@ document.onkeypress = function(e){
     window.open(webSite,'_blank')
 }
 
-
-
+function generateKeyboard(keys,mapSite){
+    for (var index = 0; index < keys.length; index++) {
+        // 生成每行的div
+        var div = tag('div')
+        div.className = 'row'
+        keyboard.appendChild(div)    
+        // 生成每行的 kbd
+        var rowKeys = keys[index] // 每行的 key hash
+        for(var item in rowKeys){
+            var kbd = tag('kbd')
+            // 生成 span 包裹文字
+            var span = tag('span')
+            span.textContent = rowKeys[item]
+            // 生成 button
+            var button = tag('button')
+            button.textContent = '编辑'
+            button.id = rowKeys[item]
+            button.onclick = function(e){
+                // 弹出框并获取用户输入的内容
+                var webSite = prompt('修改网址')
+                // 获取当前点击的元素
+                var thisTag = e['target']
+                var id = thisTag['id']
+                // 改变hash的值
+                mapSite[id] = webSite
+                // 存入localstrage
+                localStorage.setItem('webSiteHash',JSON.stringify(mapSite))
+                // 改变img
+                var thisImg = thisTag.previousSibling
+                thisImg.src = 'http://' + webSite + '/favicon.ico'
+            }
+            // 生成 img
+            var img = tag('img')
+            if(mapSite[rowKeys[item]]){
+                img.src = 'http://' + mapSite[rowKeys[item]] + '/favicon.ico'
+            }else{
+                img.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+            }
+            img.onerror = function(xxx){
+                xxx.target.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+            }
+            
+            // 添加至 kbd
+            kbd.appendChild(img)
+            kbd.appendChild(button)     
+            kbd.appendChild(span)
+            // 将 kdb 添加至每行的 div
+            div.appendChild(kbd)
+        }
+    }
+}
 
 // 初始化hash数据
 function initKeyboard(){
