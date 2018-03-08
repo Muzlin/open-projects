@@ -1,0 +1,29 @@
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
+* {
+    margin: 0;
+    padding: 0;
+}
+.hidden{
+    display: none;
+}
+canvas{
+    background: #eee;
+}
+.actions{
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin: 20px 0 0 20px;
+}
+.actions > svg{
+    margin-left: 10px;
+    transition: all 0.3s;
+}
+.active{
+    font-size: 30px;    
+}
