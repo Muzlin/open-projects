@@ -7,24 +7,43 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/style.css">
     <title>canvas</title>
-    
+
 </head>
 
 <body>
-    <canvas id="canvas"></canvas>
-    <div class="actions">        
+    <canvas id="canvas" style="position:fixed;left:0;top:0;"></canvas>
+    <div class="actions">
         <svg id="brush" class="icon active" aria-hidden="true">
             <use xlink:href="#icon-brush"></use>
         </svg>
         <svg id="eraser" class="icon" aria-hidden="true">
             <use xlink:href="#icon-eraser"></use>
         </svg>
+        <svg id="thinLine" class="icon active" aria-hidden="true">
+            <use xlink:href="#icon-line"></use>
+        </svg>
+        <svg id="middleLine" class="icon" aria-hidden="true">
+            <use xlink:href="#icon-line"></use>
+        </svg>
+        <svg id="thickLine" class="icon" aria-hidden="true">
+            <use xlink:href="#icon-line"></use>
+        </svg>
         <svg id="clear" class="icon" aria-hidden="true">
             <use xlink:href="#icon-clear"></use>
         </svg>
+        <svg id="download" class="icon" aria-hidden="true">
+            <use xlink:href="#icon-download"></use>
+        </svg>
+
+        <ol>
+            <li id="black" class="active" style="background:black"></li>
+            <li id="red" style="background:red"></li>
+            <li id="green" style="background:green"></li>
+            <li id="blue" style="background:blue"></li>
+        </ol>
     </div>
     <script src="./js/main.js"></script>
-    <script src="//at.alicdn.com/t/font_583873_66aqtnvifz1qyqfr.js"></script>
+    <script src="//at.alicdn.com/t/font_583873_7ag5b3w9u8p06bt9.js"></script>
 </body>
 
 </html>
