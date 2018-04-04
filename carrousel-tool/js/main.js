@@ -1,11 +1,9 @@
 $(function(){
-    $(btn1).on('click',function(e){
-        $('.wapper').css('transform','translateX(0)')
-    })
-    $(btn2).on('click',function(e){
-        $('.wapper').css('transform','translateX(-100%)')
-    })
-    $(btn3).on('click',function(e){
-        $('.wapper').css('transform','translateX(-200%)')
-    })
+    let btns = $('.button > button')
+    for (let i = 0; i < btns.length; i++) {
+        $(btns[i]).on('click',function(e){
+            let index = $(e.currentTarget).index()
+            $('.wapper').css('transform','translateX(-'+ index*100 +'%)')
+        })
+    }
 })
