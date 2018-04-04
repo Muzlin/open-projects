@@ -20,6 +20,6 @@ body{
 .window > .button button:nth-child(1){
     margin-left: 0;
 }
-.window > .button button.red{
+.window > .button button.active{
     color: red;
 }

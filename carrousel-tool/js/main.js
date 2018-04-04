@@ -1,5 +1,5 @@
 $(function () {
-    let n = 0;
+    let n = 0;  // 当前播放的图片索引
     let btns = $('.button > button')
     for (let i = 0; i < btns.length; i++) {
         $(btns[i]).on('click', function (e) {
@@ -12,7 +12,6 @@ $(function () {
         })
     }
 
-    let btnLength = btns.length
     let id = timer()
     $('.window').on('mouseenter', function () {
         window.clearInterval(id)
@@ -22,10 +21,17 @@ $(function () {
         id = timer()
     })
 
+    let btnLength = btns.length // 按钮、图片的数量
+    /* 触发按钮状态 */
     function activeBtn($btn) {
-        $btn.addClass('red').siblings('.red').removeClass('red')
+        $btn.addClass('active').siblings('.active').removeClass('active')
     }
 
+    /* 定时器 
+        当前的图片索引跟总数量取余
+        保证n%btnLength的范围在btnLength内
+        e.g. 0%3-0 1%3->1
+    */
     function timer() {
         let id = setInterval(() => {
             btns.eq(n % btnLength).trigger('click')
