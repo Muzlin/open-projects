@@ -1,0 +1,21 @@
+*{margin: 0;padding: 0;box-sizing: border-box;}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.window{
+    width: 300px;
+    overflow: hidden;
+}
+.window > .wapper{
+    display: flex;
+    align-items: flex-start;
+    transition: 0.3s;
+}
+.window > .button button{
+    margin-left: 10px;
+}
+.window > .button button:nth-child(1){
+    margin-left: 0;
+}

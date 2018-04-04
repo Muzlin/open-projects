@@ -1,0 +1,11 @@
+$(function(){
+    $(btn1).on('click',function(e){
+        $('.wapper').css('transform','translateX(0)')
+    })
+    $(btn2).on('click',function(e){
+        $('.wapper').css('transform','translateX(-100%)')
+    })
+    $(btn3).on('click',function(e){
+        $('.wapper').css('transform','translateX(-200%)')
+    })
+})
