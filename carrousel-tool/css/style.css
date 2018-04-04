@@ -15,7 +15,11 @@ body{
 }
 .window > .button button{
     margin-left: 10px;
+    cursor: pointer;
 }
 .window > .button button:nth-child(1){
     margin-left: 0;
+}
+.window > .button button.red{
+    color: red;
 }
