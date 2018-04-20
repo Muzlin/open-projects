@@ -18,7 +18,7 @@ $(() => {
     }
 
     function getImage(n) {
-        return $(`.images img:nth-child(${x(n)})`)
+        return $(`.images img:nth-child(${getNum(n)})`)
     }
 
     function makeCurrent($node) {
@@ -36,11 +36,11 @@ $(() => {
         return $node
     }
 
-    function x(num) {
-        if (num > 3) {
-            num = num % 3
+    function getNum(num) {
+        if (num > 5) {
+            num = num % 5
             if (num === 0) {
-                num = 3
+                num = 5
             }
         }
         return num;
