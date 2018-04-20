@@ -1,28 +1,48 @@
-$(function () {
+$(() => {
+    let n
     // 初始化图片位置
-    $('.images > img:nth-child(1)').addClass('current')
-    $('.images > img:nth-child(2)').addClass('enter')
-    $('.images > img:nth-child(3)').addClass('enter')
-
-    let n = 1;
+    Init()
+    console.log(n)
     setInterval(() => {
-        console.log(n)
-
-        $(`.images > img:nth-child(${x(n)})`).addClass('leave').removeClass('current').one('transitionend', function (e) {
+        makeLeave(getImage(n)).one('transitionend', function (e) {
             // 监听动画完成后 将图片放入移入区
-            $(e.currentTarget).removeClass('leave').addClass('enter')
+            makeEnter($(e.currentTarget))
         })
-        $(`.images > img:nth-child(${x(n+1)})`).removeClass('enter').addClass('current')
-        n += 1
+        makeCurrent(getImage(n + 1))
+        n++
     }, 3000)
-})
 
-function x(num) {
-    if (num > 3) {
-        num = num % 3
-        if (num === 0) {
-            num = 3
-        }
+    function Init() {
+        n = 1
+        getImage(n).addClass('current').siblings().addClass('enter')
     }
-    return num;1
-}
+
+    function getImage(n) {
+        return $(`.images img:nth-child(${x(n)})`)
+    }
+
+    function makeCurrent($node) {
+        $node.removeClass('leave enter').addClass('current')
+        return $node
+    }
+
+    function makeLeave($node) {
+        $node.removeClass('enter current').addClass('leave')
+        return $node
+    }
+
+    function makeEnter($node) {
+        $node.removeClass('leave current').addClass('enter')
+        return $node
+    }
+
+    function x(num) {
+        if (num > 3) {
+            num = num % 3
+            if (num === 0) {
+                num = 3
+            }
+        }
+        return num;
+    }
+})
