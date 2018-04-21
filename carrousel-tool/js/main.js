@@ -12,7 +12,7 @@ $(() => {
 
     // 监听到移入页面 启动定时器
     window.onfocus = function () {
-        Start()
+        id = Start()
     }
 
     function Start() {
