@@ -2,15 +2,29 @@ $(() => {
     let n
     // 初始化图片位置
     Init()
-    console.log(n)
-    setInterval(() => {
-        makeLeave(getImage(n)).one('transitionend', function (e) {
-            // 监听动画完成后 将图片放入移入区
-            makeEnter($(e.currentTarget))
-        })
-        makeCurrent(getImage(n + 1))
-        n++
-    }, 3000)
+
+    let id = Start()
+
+    // 监听到移出页面 清除定时器
+    window.onblur = function () {
+        this.window.clearInterval(id)
+    }
+
+    // 监听到移入页面 启动定时器
+    window.onfocus = function () {
+        Start()
+    }
+
+    function Start() {
+        return setInterval(() => {
+            makeLeave(getImage(n)).one('transitionend', function (e) {
+                // 监听动画完成后 将图片放入移入区
+                makeEnter($(e.currentTarget))
+            })
+            makeCurrent(getImage(n + 1))
+            n++
+        }, 3000)
+    }
 
     function Init() {
         n = 1
