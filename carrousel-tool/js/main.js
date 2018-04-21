@@ -5,15 +5,16 @@ $(() => {
 
     let id = Start()
 
-    // 监听到移出页面 清除定时器
-    window.onblur = function () {
-        this.window.clearInterval(id)
-    }
-
-    // 监听到移入页面 启动定时器
-    window.onfocus = function () {
-        id = Start()
-    }
+    // 监听到移出页面 
+    $(document).on('visibilitychange',(e)=>{
+        if(document.hidden){
+            // 清除定时器
+            window.clearInterval(id)
+        }else{
+            // 启动定时器
+            id = Start()
+        }
+    })
 
     function Start() {
         return setInterval(() => {
