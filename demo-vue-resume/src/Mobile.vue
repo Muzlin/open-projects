@@ -24,10 +24,10 @@
         fullStyle: [
           `/*
 * Inspired by http://strml.net/
-* 大家好，我是方方
-* 二月了，好多公司都在招聘
-* 你是不是也在准备简历呀。
-* 说做就做，我也来写一份简历！
+* Hi,我是李霖
+* 只用文字作做我介绍太单调了
+* 我就用代码来介绍吧
+* 首先准备一些样式
 */
 
 /* 首先给所有元素加上过渡效果 */
@@ -128,36 +128,51 @@ html{
 }
 `],
         currentMarkdown: '',
-        fullMarkdown: `方应杭
+        fullMarkdown: `李霖
 ----
 
-资深前端工程师，资深前端讲师
-现在在 [饥人谷](http://jirengu.com) 教前端课程。
+1990 年 10 月出生
+目前从事.NET开发与web前端开发
+前端技术的爱好者
+希望应聘前端开发岗位
 
 技能
 ----
 
-* 前端开发
-* Rails 开发
-* Node.js 开发
-* 前端授课
+* 熟悉 ES6 CSS3 HTML5
+* 熟悉 vue全家桶 jQuery
+* 熟悉 C# PHP JavaScript
+* 熟悉 ASP.NET MVC4 EF WCF WPF ADO.NET
+* 熟悉 Mysql SQL Server
+* 了解 Linux Windows Server Git HTTP
 
-工作经历
-----
+项目介绍
+-------
 
-1. [饥人谷](http://jirengu.com)
-2. 腾讯即时通讯平台部
-3. 阿里巴巴B2B部门
-4. 彩程知人项目组
+1. P2P网络金融平台 底层架构与后台管理站点的研发
+2. 内部OA项目 后端业务逻辑与管理平台的研发
+3. 点餐系统 vue全家桶实现后台管理 前后端分离
+3. demo canvas 画板
+4. demo vue 实现的印象云笔记
+5. demo node.js 实现的简单http服务
+6. demo 原生JS实现的无缝轮播
+7. demo 一个简易导航网站
+8. demo 原生JS实现一个会动的皮卡丘
+9. demo 原生JS实现会动的简历
+0. demo 会动的简历vue版本
+
+联系方式
+-------
+
+- QQ 1030996014
+- Email muzlingm@gmail.com
+- 手机 18180819611
 
 链接
 ----
 
-* [GitHub](https://github.com/frankfang)
-* [我的文章](https://www.zhihu.com/people/zhihusucks/pins/posts)
-
-> 如果你喜欢这个效果，
-Fork [我的项目](https://github.com/jirengu-inc/animating-resume)，打造你自己的简历！
+* [GitHub](https://github.com/Muzlin)
+* [我的博客](https://blog.muzlin.cn/)
 
 `
       }

@@ -134,6 +134,28 @@ html{
 * 熟悉 Mysql SQL Server
 * 了解 Linux Windows Server Git HTTP
 
+项目介绍
+-------
+
+1. P2P网络金融平台 底层架构与后台管理站点的研发
+2. 内部OA项目 后端业务逻辑与管理平台的研发
+3. 点餐系统 vue全家桶实现后台管理 前后端分离
+3. demo canvas 画板
+4. demo vue 实现的印象云笔记
+5. demo node.js 实现的简单http服务
+6. demo 原生JS实现的无缝轮播
+7. demo 一个简易导航网站
+8. demo 原生JS实现一个会动的皮卡丘
+9. demo 原生JS实现会动的简历
+0. demo 会动的简历vue版本
+
+联系方式
+-------
+
+- QQ 1030996014
+- Email muzlingm@gmail.com
+- 手机 18180819611
+
 链接
 ----
 
