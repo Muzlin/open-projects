@@ -91,12 +91,12 @@ var md = `
 
 # 技能介绍
 
-熟悉 ES6 CSS3 HTML5
-熟悉 vue全家桶 jQuery
-熟悉 C# PHP JavaScript
-熟悉 ASP.NET MVC4 EF WCF WPF ADO.NET
-熟悉 Mysql SQL Server
-了解 Linux Windows Server Git HTTP
+* 熟悉 ES6 CSS3 HTML5
+* 熟悉 vue全家桶 jQuery
+* 熟悉 C# PHP JavaScript
+* 熟悉 ASP.NET MVC4 EF WCF WPF ADO.NET
+* 熟悉 Mysql SQL Server
+* 了解 Linux Windows Server Git HTTP
 
 # 项目介绍
 
