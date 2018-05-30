@@ -6,4 +6,4 @@
 
 * [轮播](http://project.muzlin.cn/carrousel-tool)
 
-* [会动的简历](http://project.muzlin.cn/animating-resume)
+* [会动的简历](http://project.muzlin.cn/move-resume)
