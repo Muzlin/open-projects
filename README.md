@@ -5,3 +5,5 @@
 * [canvas画布](http://project.muzlin.cn/canvas-tool)
 
 * [轮播](http://project.muzlin.cn/carrousel-tool)
+
+* [会动的简历](http://project.muzlin.cn/animating-resume)
