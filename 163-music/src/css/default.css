@@ -30,6 +30,10 @@ body{
   flex-direction: column;
 }
 
+#songList-container{
+  flex-grow: 1;
+}
+
 .newSong{
   text-align: center;
   padding: 10px 0;
@@ -40,7 +44,6 @@ body{
 }
 
 .songList{
-  flex-grow: 1;
   text-align: left;
   border-top: 1px solid #999;
 }
@@ -51,10 +54,6 @@ body{
 
 .songList > li.active{
   background-color: #d4d4d4;
-}
-
-.uploadArea{
-
 }
 
 .uploadArea > .draggable {
@@ -77,4 +76,34 @@ body{
 
 .uploadArea > .draggable > .clickable {
   cursor: pointer;
+}
+
+/* main */
+.page > main{
+  background-color: #d4d4d4;
+  padding: 20px;
+}
+
+.form{
+
+}
+
+.form > .row{
+  margin: 10px;
+}
+
+.form > .row input{
+  -web-kit-appearance:none;
+  -moz-appearance: none;
+  font-size:1.4em;
+  border-radius:4px;
+  border:1px solid #c8cccf;
+  color:#6a6f77;
+  outline:0;
+  height: 2em;
+}
+
+.form > .row > button{
+  padding: 5px 20px;
+  border-radius: 5px;
 }
