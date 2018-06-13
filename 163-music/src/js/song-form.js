@@ -8,24 +8,18 @@
       <h1>新建歌曲</h1>
       <form action="" class="form">
         <div class="row">
-          <label for="">
-           歌名:
-            <input name="name" type="text" value="__name__">
-          </label>
+          <label for="">歌名</label>
+          <input name="name" type="text" value="__name__">
         </div>
         <div class="row">
-          <label for="">
-            歌手:
-            <input name="singer" type="text" value="__singer__">
-          </label>
+          <label for="">歌手</label>
+          <input name="singer" type="text" value="__singer__">
         </div>
         <div class="row">
-          <label for="">
-            外链:
-            <input name="url" type="text" value="__url__">
-          </label>
+          <label for="">外链</label>
+          <input name="url" type="text" value="__url__">
         </div>
-        <div class="row">
+        <div class="row actions">
           <button type="submit">保存</button>
         </div>
       </form>
@@ -61,10 +55,10 @@
       song.set('name', data.name)
       song.set('singer', data.singer)
       song.set('url', data.url)
-      song.set('id', data.id)
+      //song.set('id', data.id)
       return song.save().then((newSong)=> {
-        let {id, attributes} = newSong
-        // assign 将左边的对象赋给右边的对象
+        let {id,attributes} = newSong
+        //assign 将左边的对象赋给右边的对象
         Object.assign(this.data,{
           id,// id: id
           ...attributes // 等同于下面 es6新语法
@@ -104,10 +98,14 @@
         })
         // 将获取到的数据传递给model操作
         this.model.create(data).then(()=>{
-          this.view.render(this.model.data)
           this.view.reset()
-        }).catch((err)=>{
-          console.log(err)
+          // 发布一个保存成功的事件
+          // 此处如果传递 this.model.data 是传递了一个引用地址
+          // 需要深拷贝一次传递 不然这个模块改变了值 订阅的模块会对应改变
+          //window.eventHub.emit('create',this.model.data)
+          let string = JSON.stringify(this.model.data)
+          let object = JSON.parse(string)
+          window.eventHub.emit('create',object)
         })
       })
     }

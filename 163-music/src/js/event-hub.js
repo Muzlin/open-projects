@@ -33,7 +33,7 @@ window.eventHub = {
     if (this.events[eventName] === undefined) {
       this.events[eventName] = []
     }
-    // 添加事件
+    // 添加事件对应的函数
     this.events[eventName].push(fn)
   }
 }
