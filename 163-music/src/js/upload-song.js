@@ -57,8 +57,8 @@
             msg.textContent = '上传成功'
             // 触发所有订阅了upload的事件
             window.eventHub.emit('upload', {
-              link: sourceLink,
-              key: res.key
+              url: sourceLink,
+              name: res.key
             })
           },
           'Error': function (up, err, errTip) {
