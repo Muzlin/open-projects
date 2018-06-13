@@ -24,6 +24,7 @@ var server = http.createServer(function (request, response) {
     response.statusCode = 200
     response.setHeader('Content-Type', 'text/json; charset=utf-8')
     response.setHeader('Access-Control-Allow-Origin','*')
+    response.removeHeader('Date')
 
     var config = JSON.parse(fs.readFileSync('./qiniu_config.json'))
     let {AK,SK,Bucket} = config
