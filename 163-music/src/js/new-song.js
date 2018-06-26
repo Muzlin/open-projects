@@ -8,10 +8,10 @@
       $(this.el).html(this.template)
     },
     active(){
-      $(this.view.el).addClass('active')
+      $(this.el).addClass('active')
     },
     deactive(){
-      $(this.view.el).removeClass('active')
+      $(this.el).removeClass('active')
     }
   }
   let model = {}

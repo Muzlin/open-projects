@@ -78,11 +78,7 @@
       this.model = model
       this.view.render(this.model.data)
       this.bindEvents()
-      // 订阅上传事件
-      window.eventHub.on('upload', (data) => {
-        // 重新渲染view
-        this.view.render(data)
-      })
+      this.bindEventHub()
     },
     bindEvents() {
       // 事件委托(渲染前找不到 form) 监听表单提交
@@ -107,6 +103,18 @@
           let object = JSON.parse(string)
           window.eventHub.emit('create',object)
         })
+      })
+    },
+    bindEventHub(){
+      // 订阅上传事件
+      window.eventHub.on('upload', (data) => {
+        // 重新渲染view
+        this.view.render(data)
+      })
+      // 订阅歌曲列表选择事件
+      window.eventHub.on('select',(data)=>{
+        this.model.data = data
+        this.view.render(data)
       })
     }
   }

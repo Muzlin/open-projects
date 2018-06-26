@@ -65,7 +65,15 @@
         this.view.activeItem(e.currentTarget)
         // 发布一个选择事件
         let songId = e.currentTarget.getAttribute('data-id')
-        window.eventHub.emit('select',songId)
+        let data
+        let songs = this.model.data.songs
+        for(let i in songs) {
+          if(songs[i].id === songId){
+            data = songs[i]
+            break
+          }
+        }
+        window.eventHub.emit('select',JSON.parse(JSON.stringify(data)))
       })
     },
     bindEventHub(){
