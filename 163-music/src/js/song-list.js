@@ -11,7 +11,7 @@
       $el.html(this.template)
       // 遍历songs 组合li
       let {songs} = data
-      let liList = songs.map((song)=>$('<li></li>').text(song.name))
+      let liList = songs.map((song)=>$('<li></li>').text(song.name).attr('data-id',song.id))
       // 清空<ul></ul>
       $el.find('ul').empty()
       // 循环 插入<li></li>
@@ -62,8 +62,10 @@
     },
     bindEvents(){
       $(this.view.el).on('click','li',(e)=>{
-        //$(e.currentTarget).addClass('active').siblings().removeClass('active')
         this.view.activeItem(e.currentTarget)
+        // 发布一个选择事件
+        let songId = e.currentTarget.getAttribute('data-id')
+        window.eventHub.emit('select',songId)
       })
     },
     bindEventHub(){
