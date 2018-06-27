@@ -24,6 +24,9 @@
     },
     activeItem(el){
       $(el).addClass('active').siblings().removeClass('active')
+    },
+    deactive(){
+      $(this.el).find('ul > li.active').removeClass('active')
     }
   }
   let model = {
@@ -85,6 +88,10 @@
       window.eventHub.on('create',(data)=>{
         this.model.data.songs.push(data)
         this.view.render(this.model.data)
+      })
+      // 订阅新建歌曲点击事件
+      window.eventHub.on('new',()=>{
+        this.view.deactive()
       })
     }
 

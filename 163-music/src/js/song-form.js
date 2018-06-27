@@ -5,7 +5,6 @@
       this.$el = $(this.el)
     },
     template: `
-      <h1>新建歌曲</h1>
       <form action="" class="form">
         <div class="row">
           <label for="">歌名</label>
@@ -34,6 +33,11 @@
       })
       // 渲染
       $(this.el).html(html)
+      if(data.id){
+        $(this.el).prepend('<h1>编辑歌曲</h1>')
+      }else{
+        $(this.el).prepend('<h1>新建歌曲</h1>')
+      }
     },
     reset(){
       this.render({})
@@ -115,6 +119,11 @@
       window.eventHub.on('select',(data)=>{
         this.model.data = data
         this.view.render(data)
+      })
+      // 订阅新建歌曲点击事件
+      window.eventHub.on('new',()=>{
+        this.model.data = {}
+        this.view.render(this.model.data)
       })
     }
   }

@@ -62,6 +62,7 @@
             })
           },
           'Error': function (up, err, errTip) {
+            console.log(err)
             //上传出错时，处理相关的事情
             msg.textContent = '上传失败'
           },
