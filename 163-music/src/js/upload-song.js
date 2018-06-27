@@ -47,27 +47,29 @@
           },
           'UploadProgress': function (up, file) {
             // 每个文件上传时，处理相关的事情
-            msg.textContent = '上传中'
+            window.eventHub.emit('load')
           },
           'FileUploaded': function (up, file, info) {
             // 查看简单反馈
             var domain = up.getOption('domain')
             var res = JSON.parse(info.response)
             var sourceLink = `http://${domain}/${encodeURIComponent(res.key)}` // 获取上传成功后的文件的Url
-            msg.textContent = '上传成功'
             // 触发所有订阅了upload的事件
             window.eventHub.emit('upload', {
               url: sourceLink,
               name: res.key
             })
+            window.eventHub.emit('deload')
           },
           'Error': function (up, err, errTip) {
             console.log(err)
             //上传出错时，处理相关的事情
             msg.textContent = '上传失败'
+            window.eventHub.emit('deload')
           },
           'UploadComplete': function () {
             //队列文件处理完毕后，处理相关的事情
+            window.eventHub.emit('deload')
           }
         }
       })

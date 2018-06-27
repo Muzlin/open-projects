@@ -10,8 +10,14 @@
       let $el = $(this.el)
       $el.html(this.template)
       // 遍历songs 组合li
-      let {songs} = data
-      let liList = songs.map((song)=>$('<li></li>').text(song.name).attr('data-id',song.id))
+      let {songs,currentSongId} = data
+      let liList = songs.map((song)=>{
+        let $li = $('<li></li>').text(song.name).attr('data-id',song.id)
+        if(song.id === currentSongId){
+          $li.addClass('active')
+        }
+        return $li
+      })
       // 清空<ul></ul>
       $el.find('ul').empty()
       // 循环 插入<li></li>
@@ -21,14 +27,12 @@
     },
     clearActive(){
       $(this.el).find('.active').removeClass('active')
-    },
-    activeItem(el){
-      $(el).addClass('active').siblings().removeClass('active')
     }
   }
   let model = {
     data:{
-      songs:[]
+      songs:[],
+      currentSongId:''
     },
     find(){
       let query = new AV.Query('Song')
@@ -62,9 +66,11 @@
     },
     bindEvents(){
       $(this.view.el).on('click','li',(e)=>{
-        this.view.activeItem(e.currentTarget)
         // 发布一个选择事件
         let songId = e.currentTarget.getAttribute('data-id')
+        this.model.data.currentSongId = songId
+        this.view.render(this.model.data)
+
         let data
         let songs = this.model.data.songs
         for(let i in songs) {
