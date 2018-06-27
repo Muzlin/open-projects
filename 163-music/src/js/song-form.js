@@ -52,9 +52,9 @@
     },
     create(data) {
       // 声明类型
-      var Song = AV.Object.extend('Song')
+      let Song = AV.Object.extend('Song')
       // 新建对象
-      var song = new Song()
+      let song = new Song()
       // 设置名称
       song.set('name', data.name)
       song.set('singer', data.singer)
@@ -72,7 +72,28 @@
         })
       }, function (error) {
         console.error(error)
-      });
+      })
+    },
+    update(data){
+      let Song = AV.Object.createWithoutData('Song', data.id)
+      // 修改属性
+      Song.set('name', data.name)
+      Song.set('singer', data.singer)
+      Song.set('url', data.url)
+      // 保存到云端
+      return Song.save().then((newSong)=> {
+        let {id,attributes} = newSong
+        //assign 将左边的对象赋给右边的对象
+        Object.assign(this.data,{
+          id,// id: id
+          ...attributes // 等同于下面 es6新语法
+          // name: attributes.name,
+          // singer: attributes.singer,
+          // url: attributes.url
+        })
+      }, function (error) {
+        console.error(error)
+      })
     }
   }
   let controller = {
@@ -96,17 +117,26 @@
         needs.map((string) => {
           data[string] = this.view.$el.find(`[name="${string}"]`).val()
         })
-        // 将获取到的数据传递给model操作
-        this.model.create(data).then(()=>{
-          this.view.reset()
-          // 发布一个保存成功的事件
-          // 此处如果传递 this.model.data 是传递了一个引用地址
-          // 需要深拷贝一次传递 不然这个模块改变了值 订阅的模块会对应改变
-          //window.eventHub.emit('create',this.model.data)
-          let string = JSON.stringify(this.model.data)
-          let object = JSON.parse(string)
-          window.eventHub.emit('create',object)
-        })
+        if(this.model.data.id){
+          // 将获取到的数据传递给model操作
+          data.id = this.model.data.id
+          this.model.update(data).then(()=>{
+            this.view.reset()
+            window.eventHub.emit('update',JSON.parse(JSON.stringify(this.model.data)))
+          })
+        }else{
+          // 将获取到的数据传递给model操作
+          this.model.create(data).then(()=>{
+            this.view.reset()
+            // 发布一个保存成功的事件
+            // 此处如果传递 this.model.data 是传递了一个引用地址
+            // 需要深拷贝一次传递 不然这个模块改变了值 订阅的模块会对应改变
+            //window.eventHub.emit('create',this.model.data)
+            let string = JSON.stringify(this.model.data)
+            let object = JSON.parse(string)
+            window.eventHub.emit('create',object)
+          })
+        }
       })
     },
     bindEventHub(){

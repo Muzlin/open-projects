@@ -24,9 +24,6 @@
     },
     activeItem(el){
       $(el).addClass('active').siblings().removeClass('active')
-    },
-    deactive(){
-      $(this.el).find('ul > li.active').removeClass('active')
     }
   }
   let model = {
@@ -91,7 +88,17 @@
       })
       // 订阅新建歌曲点击事件
       window.eventHub.on('new',()=>{
-        this.view.deactive()
+        this.view.clearActive()
+      })
+      // 订阅编辑歌曲事件
+      window.eventHub.on('update',(data)=>{
+        let songs = this.model.data.songs
+        for (let i = 0; i < songs.length; i++) {
+          if(songs[i].id === data.id){
+            songs[i] = data
+          }
+        }
+        this.view.render(this.model.data)
       })
     }
 
