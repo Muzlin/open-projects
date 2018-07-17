@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>register</title>
+  <script src="./fastclick.js"></script>
+  <script src="./jquery.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    *::after {
+      box-sizing: border-box;
+    }
+
+    *::before {
+      box-sizing: border-box;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    input {
+      font: inherit;
+    }
+
+    html {
+      max-width: 750px;
+      margin: auto;
+    }
+
+    main {
+      background: #FFF0D1;
+      font-size: 15px;
+    }
+
+    main .container {
+      background: #FFF8EA;
+      display: none;
+    }
+
+    main .container.active {
+      display: block;
+    }
+
+    .container > .header > img {
+      display: inline-block;
+      max-width: 100%;
+      height: auto;
+      vertical-align: middle;
+      border: none;
+    }
+
+    .container > .form {
+      color: #5E6464;
+    }
+
+    .form > ul {
+    }
+
+    .form > ul > li {
+      border: 1px solid #FFF0D1;
+      padding: 10px 16px;
+    }
+
+    .form .form-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .form .form-item > label {
+
+    }
+
+    .form .form-item > .checkInput {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form .form-item > .checkInput > img {
+      width: 6px;
+      height: 10px;
+      margin-left: 5px;
+    }
+
+    .form .form-item input {
+      border: none;
+      outline: none;
+      background: #FFF8EA;
+      color: #6A706F;
+      width: 150px;
+      font-size: 14px;
+      line-height: 14px;
+      text-align: right;
+    }
+
+    .form .form-item.codeInput input {
+      text-align: left;
+      padding-left: 8px;
+    }
+
+    .form .form-item input::-webkit-input-placeholder {
+      color: #C1BCB4;
+      text-align: right;
+    }
+
+    .form .form-item.codeInput input::-webkit-input-placeholder {
+      text-align: left;
+    }
+
+    .form .form-item .codeButton {
+      background: #FCD97C;
+      outline: none;
+      border: none;
+      padding: 5px 16px;
+      color: #E65D4A;
+    }
+
+    .form .form-item .codeButton.disabled {
+      background: #ccc;
+    }
+
+    .form .hint {
+      background: #FFF0D1;
+      color: #1E1C18;
+      font: inherit;
+      padding: 5px 16px;
+    }
+
+    .selection {
+      background: #FFF0D1;
+    }
+
+    .selection.rule {
+      padding: 8px 16px 50px 16px;
+      font-size: 12px;
+      text-align: justify;
+      text-justify: distribute-all-lines; /*ie6-8*/
+      text-align-last: justify; /* ie9*/
+      -moz-text-align-last: justify; /*ff*/
+      -webkit-text-align-last: justify; /*chrome 20+*/
+    }
+
+    .selection.rule > span {
+      color: #B4AB99;
+    }
+
+    .selection.rule > span > a {
+      color: #7D7970;
+    }
+
+    .selection.rule > input[type=checkbox] {
+      display: none;
+    }
+
+    .selection.rule > .agree-box {
+      position: relative;
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      vertical-align: bottom;
+      background: url(./icon-check.png) left center no-repeat;
+      -webkit-background-size: 12px;
+      background-size: 12px;
+      vertical-align: middle;
+      margin-left: 5px;
+      margin-bottom: 1px;
+    }
+
+    .selection.rule > .agree-box.active {
+      background: url(./icon-checks.png) left center no-repeat;
+      position: relative;
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      vertical-align: bottom;
+      -webkit-background-size: 12px;
+      background-size: 12px;
+      vertical-align: middle;
+      margin-left: 5px;
+      margin-bottom: 1px;
+    }
+
+    .selection.submit {
+      background: #E03C3D;
+      padding: 10px 0;
+      text-align: center;
+      color: #FBDCBF;
+    }
+
+    .selection.description {
+      padding: 50px 16px 30px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      color: #D8CCB3;
+      line-height: 12px;
+    }
+
+    .selection.description img {
+      width: 12px;
+      height: 12px;
+      margin-right: 3px;
+    }
+
+    main > .boxList {
+      display: none;
+      height: 100vh;
+      background: #FFF;
+      transition: all 3s;
+    }
+
+    main > .boxList.active {
+      display: block;
+      transition: all 3s;
+    }
+
+    main > .boxList ul {
+      margin-top: 20px;
+    }
+
+    main > .boxList ul li {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <div class="container active">
+    <div class="header"><img src="./banner.png" alt=""></div>
+    <div class="form">
+      <ul>
+        <li>
+          <div class="form-item">
+            <lable>手机号码</lable>
+            <input type="text" placeholder="请输入您的手机号码">
+          </div>
+        </li>
+        <li>
+          <div class="form-item">
+            <lable>登录密码</lable>
+            <input type="password" placeholder="请输入您的登录密码"></div>
+        </li>
+        <li>
+          <div class="form-item codeInput">
+            <div>
+              <lable>短信验证码</lable>
+              <input type="text" placeholder="请输入短信验证码" id="phone"></div>
+            <div>
+              <button class="codeButton" onclick="sendCode($(this))">发送验证码</button>
+            </div>
+          </div>
+        </li>
+        <li class="hint">
+          <div>
+            <span>充值、提现等资金操作前均须认证开户：</span>
+          </div>
+        </li>
+        <li>
+          <div class="form-item">
+            <lable>持卡人</lable>
+            <input type="text" placeholder="填写您的真实姓名"></div>
+        </li>
+        <li>
+          <div class="form-item">
+            <lable>身份证号码</lable>
+            <input type="text" placeholder="大陆有效居民身份证"></div>
+        </li>
+        <li>
+          <div class="form-item">
+            <lable>选择银行</lable>
+            <div class="checkInput" id="checkBank">
+              <input type="text" readonly placeholder="请选择" id="bankValue">
+              <img src="./icon-arrow-right.png" alt="">
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="form-item">
+            <lable>银行卡号</lable>
+            <input type="text" placeholder="填写储蓄卡号"></div>
+        </li>
+        <li>
+          <div class="form-item">
+            <lable>开户省份</lable>
+            <div class="checkInput" id="checkProvince">
+              <input type="text" readonly placeholder="请选择" id="provinceValue">
+              <img src="./icon-arrow-right.png" alt="">
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="form-item">
+            <lable>开户城市</lable>
+            <div class="checkInput" id="checkCity">
+              <input type="text" readonly placeholder="请选择" id="cityValue">
+              <img src="./icon-arrow-right.png" alt="">
+            </div>
+          </div>
+        </li>
+        <li class="hint">
+          <div>
+            <h4></h4>
+          </div>
+        </li>
+        <li>
+          <div class="form-item">
+            <lable>存管银行提现支付密码</lable>
+            <input type="password" placeholder="请设置6位数字交易密码"></div>
+        </li>
+        <li>
+          <div class="form-item">
+            <lable>确认密码</lable>
+            <input type="password" placeholder="请确认交易密码"></div>
+        </li>
+      </ul>
+    </div>
+    <div class="selection rule" id="checkBox">
+      <input type="checkbox" id="agree-checkbox">
+      <label class="agree-box active" for="agree-checkbox"></label>
+      <span>点击"立即确认"即表示您已同意 <a href="#">《和掌柜平台服务协议》</a>
+        <a href="#">《网贷客户交易结算资金账户三方协议》</a><a href="#">《用户授权协议》</a></span>
+    </div>
+    <div class="selection submit">
+      <butto>点击确认</butto>
+    </div>
+    <div class="selection description">
+      <div>
+        <img src="./icon-safe.png" alt="">
+        <span>和掌柜三年稳健运行</span>
+      </div>
+    </div>
+  </div>
+  <div class="boxList bankBox">
+    <ul>
+      <li data="1">招商银行</li>
+      <li data="2">招商银行</li>
+      <li data="3">招商银行</li>
+      <li data="4">招商银行</li>
+      <li data="5">招商银行</li>
+      <li data="6">招商银行</li>
+      <li data="7">招商银行</li>
+      <li data="8">招商银行</li>
+      <li data="9">招商银行</li>
+      <li data="10">招商银行</li>
+    </ul>
+  </div>
+  <div class="boxList provinceBox">
+    <ul>
+      <li data="1">招商银行</li>
+      <li data="2">招商银行</li>
+      <li data="3">招商银行</li>
+      <li data="4">招商银行</li>
+      <li data="5">招商银行</li>
+      <li data="6">招商银行</li>
+      <li data="7">招商银行</li>
+      <li data="8">招商银行</li>
+      <li data="9">招商银行</li>
+      <li data="10">招商银行</li>
+    </ul>
+  </div>
+  <div class="boxList cityBox">
+    <ul>
+      <li data="1">招商银行</li>
+      <li data="2">招商银行</li>
+      <li data="3">招商银行</li>
+      <li data="4">招商银行</li>
+      <li data="5">招商银行</li>
+      <li data="6">招商银行</li>
+      <li data="7">招商银行</li>
+      <li data="8">招商银行</li>
+      <li data="9">招商银行</li>
+      <li data="10">招商银行</li>
+    </ul>
+  </div>
+</main>
+<script>
+  $(function () {
+    FastClick.attach(document.body)
+  })
+</script>
+<script>
+  $('#checkBank').on('click', function (e) {
+    let url = 'http://118.89.36.194:18487/Inter/services/SoapService/doService?requestXml={"REQUESTS":[{"REQ_COMM_DATA":{"service":"A1705003","dataType":"json","OPERATION_PLATFORM":"2"}}]}'
+    $.get(url,function (data) {
+      let code = JSON.parse($(data).find('return').html().toString())['ANSWERS'][0].ANS_MSG_HDR.MSG_CODE
+      if(code !== 0){
+        return false
+      }
+      let obj = JSON.parse($(data).find('return').html().toString())['ANSWERS'][0].ANS_COMM_DATA[0]
+      if(obj && obj.length > 0){
+        let html = '<ul>'
+        obj.map(item=>{
+          html += '<li data="'+item.YHMC+'" data-id="'+item.YMBM+'">'+
+            item.YHMC+
+            '</li>'
+        })
+        html += '</ul>'
+        $('.bankBox').html(html)
+      }
+    })
+    $('.bankBox').addClass('active')
+    $('.container').removeClass('active')
+  })
+  $('.boxList.bankBox').on('click', 'li', function (e) {
+    var data = $(e.currentTarget).attr('data')
+    if (data) {
+      $('.bankBox').removeClass('active')
+      $('.container').addClass('active')
+      $('#bankValue').val(data)
+    }
+  })
+</script>
+<script>
+  $('#checkProvince').on('click', function (e) {
+    $.get('http://118.89.36.194:18487/Inter/services/SoapService/doService?requestXml={"REQUESTS":[{"REQ_COMM_DATA":{"service":"A1705001","dataType":"json"}}]}', function (data) {
+      let code = JSON.parse($(data).find('return').html().toString())['ANSWERS'][0].ANS_MSG_HDR.MSG_CODE
+      if(code !== 0){
+        return false
+      }
+      let obj = JSON.parse($(data).find('return').html().toString())['ANSWERS'][0].ANS_COMM_DATA[0]
+      if(obj && obj.length > 0){
+        let html = '<ul>'
+        obj.map(item=>{
+          html += '<li data="'+item.SSMC+'" data-id="'+item.SSDM+'">'+
+              item.SSMC+
+              '</li>'
+        })
+        html += '</ul>'
+        $('.provinceBox').html(html)
+      }
+    })
+
+
+    $('.provinceBox').addClass('active')
+    $('.container').removeClass('active')
+  })
+  $('.boxList.provinceBox').on('click', 'li', function (e) {
+    let data = $(e.currentTarget).attr('data')
+    let data_id = $(e.currentTarget).attr('data-id')
+    if (data) {
+      $('.provinceBox').removeClass('active')
+      $('.container').addClass('active')
+      $('#provinceValue').val(data).attr('pid',data_id)
+    }
+  })
+</script>
+<script>
+  $('#checkCity').on('click', function (e) {
+    let pid = $('#provinceValue').attr('pid')
+    if(!pid){
+      alert(111)
+      return false;
+    }
+    let url = 'http://118.89.36.194:18487/Inter/services/SoapService/doService?requestXml={"REQUESTS":[{"REQ_COMM_DATA":{"service":"A1705002","dataType":"json","PAR_REGION_ID":"'+pid+'"}}]}'
+    $.get(url,function (data) {
+      let code = JSON.parse($(data).find('return').html().toString())['ANSWERS'][0].ANS_MSG_HDR.MSG_CODE
+      if(code !== 0){
+        return false
+      }
+      let obj = JSON.parse($(data).find('return').html().toString())['ANSWERS'][0].ANS_COMM_DATA[0]
+      if(obj && obj.length > 0) {
+        let html = '<ul>'
+        obj.map(item => {
+          html += '<li data="' + item.DQMC + '" data-id="' + item.DQDM + '">' +
+            item.DQMC +
+            '</li>'
+        })
+        html += '</ul>'
+        $('.cityBox').html(html)
+      }
+    })
+
+    $('.cityBox').addClass('active')
+    $('.container').removeClass('active')
+  })
+  $('.boxList.cityBox').on('click', 'li', function (e) {
+    var data = $(e.currentTarget).attr('data')
+    if (data) {
+      $('.cityBox').removeClass('active')
+      $('.container').addClass('active')
+      $('#cityValue').val(data)
+    }
+  })
+</script>
+<script>
+  function sendCode(e) {
+    let phone = $('#phone').val()
+    if(!phone){
+      return false
+    }
+    let url = 'http://118.89.36.194:18487/Inter/services/SoapService/doService?requestXml={"REQUESTS":[{"REQ_COMM_DATA":{"service":"S000101","dataType":"json","TYPE":"41951","MOBILE_NO":"'+phone+'"}}]}'
+    $.get(url,function (data) {
+      let code = JSON.parse($(data).find('return').html().toString())['ANSWERS'][0].ANS_MSG_HDR.MSG_CODE
+      let msg = JSON.parse($(data).find('return').html().toString())['ANSWERS'][0].ANS_MSG_HDR.MSG_TEXT
+      if(code !== 0){
+        alert(msg)
+        return false
+      }
+      let time = 60
+      e.attr('disabled', true).addClass('disabled')
+      let timeId = setInterval(function () {
+        e.text(time)
+        time--
+        if (time === 0) {
+          window.clearInterval(timeId)
+          e.text('发送验证码')
+        }
+      }, 1000)
+    })
+  }
+</script>
+</body>
+</html>
